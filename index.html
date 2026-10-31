@@ -1,0 +1,204 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Premium handcrafted furniture collection dashboard">
+  <title>Furniture Studio | Workspace</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" aria-label="Main navigation">
+      <a class="brand" href="#dashboard">
+        <span class="brand-mark">F.</span>
+        <span>Furniture Studio<small>WORKSHOP GALLERY</small></span>
+      </a>
+
+      <nav class="side-nav">
+        <a class="nav-link active" href="#dashboard">▦ <span>Dashboard</span></a>
+        <a class="nav-link" href="#collection">▤ <span>All Furniture</span></a>
+        <a class="nav-link" href="#furniture-form" id="nav-add">＋ <span>Add Furniture</span></a>
+      </nav>
+
+      <div class="sidebar-note">
+        <span class="eyebrow">CRAFTED WITH PURPOSE</span>
+        <h2>Timeless design.<br>Lasting quality.</h2>
+        <p>Your furniture collection, thoughtfully organised.</p>
+        <a href="#collection" class="sidebar-link">View collection →</a>
+      </div>
+
+      <div class="sidebar-footer">
+        <span class="avatar" aria-hidden="true">F</span>
+        <span>Workshop Workspace<small>Furniture Management</small></span>
+      </div>
+    </aside>
+
+    <div class="workspace">
+      <header class="topbar">
+        <div>
+          <span class="eyebrow">WORKSPACE / COLLECTION</span>
+          <p class="topbar-caption">Handcrafted Furniture Studio</p>
+        </div>
+        <span class="status"><span aria-hidden="true"></span> Workspace active</span>
+      </header>
+
+      <main class="container" id="dashboard">
+        <section class="intro">
+          <div>
+            <p class="eyebrow">OVERVIEW</p>
+            <h1>Furniture Dashboard</h1>
+            <p class="subtitle">Manage your collection with clarity and precision.</p>
+          </div>
+          <button class="button button-dark" id="add-toggle"
+            type="button" aria-expanded="false" aria-controls="furniture-form">
+            + Add furniture
+          </button>
+        </section>
+
+        <section class="stats" aria-label="Collection overview">
+          <article class="stat-card">
+            <span>Total pieces</span>
+            <strong id="total-count">0</strong>
+            <small class="stat-foot">In your collection</small>
+          </article>
+          <article class="stat-card">
+            <span>Categories</span>
+            <strong id="category-count">0</strong>
+            <small class="stat-foot">Unique categories</small>
+          </article>
+          <article class="stat-card">
+            <span>Collection value</span>
+            <strong id="total-value">₹0</strong>
+            <small class="stat-foot">Combined listed value</small>
+          </article>
+        </section>
+
+        <section class="collection" id="collection" aria-labelledby="collection-title">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">YOUR WORKSHOP</p>
+              <h2 id="collection-title">Furniture collection</h2>
+              <p class="section-description">Browse and manage your handcrafted pieces.</p>
+            </div>
+            <span class="collection-label">COLLECTION</span>
+          </div>
+
+          <form id="furniture-form" class="furniture-form" hidden novalidate>
+            <h3 id="form-title">Add a new piece</h3>
+            <input type="hidden" id="furniture-id">
+
+            <div class="form-grid">
+              <div class="field">
+                <label for="name">Furniture name *</label>
+                <input id="name" name="name" type="text" maxlength="80"
+                  required autocomplete="off" aria-describedby="name-error">
+                <small class="error" id="name-error"></small>
+              </div>
+
+              <div class="field">
+                <label for="category">Category *</label>
+                <select id="category" name="category" required
+                  aria-describedby="category-error">
+                  <option value="">Choose category</option>
+                  <option>Chair</option>
+                  <option>Table</option>
+                  <option>Sofa</option>
+                  <option>Bed</option>
+                  <option>Cabinet</option>
+                  <option>Other</option>
+                </select>
+                <small class="error" id="category-error"></small>
+              </div>
+
+              <div class="field">
+                <label for="price">Price (₹) *</label>
+                <input id="price" name="price" type="number" min="1"
+                  max="100000000" step="0.01" required
+                  aria-describedby="price-error">
+                <small class="error" id="price-error"></small>
+              </div>
+
+              <div class="field">
+                <label for="material">Material *</label>
+                <input id="material" name="material" type="text" maxlength="60"
+                  required autocomplete="off" aria-describedby="material-error">
+                <small class="error" id="material-error"></small>
+              </div>
+            </div>
+
+            <div class="field">
+              <label for="description">Description</label>
+              <textarea id="description" name="description" rows="3"
+                maxlength="300" placeholder="Describe the craftsmanship..."></textarea>
+            </div>
+
+            <p id="form-message" class="form-message" role="status"
+              aria-live="polite"></p>
+
+            <div class="form-actions">
+              <button class="button button-dark" type="submit" id="save-button">
+                Save furniture
+              </button>
+              <button class="button button-light" type="button" id="cancel-edit">
+                Cancel
+              </button>
+            </div>
+          </form>
+
+          <div class="toolbar">
+            <div class="search-wrap">
+              <label class="sr-only" for="search">Search furniture</label>
+              <input id="search" type="search"
+                placeholder="⌕  Search furniture, material..."
+                autocomplete="off">
+            </div>
+            <div>
+              <label class="sr-only" for="filter-category">Filter by category</label>
+              <select id="filter-category">
+                <option value="">All categories</option>
+                <option>Chair</option>
+                <option>Table</option>
+                <option>Sofa</option>
+                <option>Bed</option>
+                <option>Cabinet</option>
+                <option>Other</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="results-bar">
+            <p id="results-count" class="results-count" aria-live="polite"></p>
+            <span class="results-note">Furniture inventory</span>
+          </div>
+
+          <p id="loading" class="loading" role="status" hidden>
+            Loading collection...
+          </p>
+
+          <div id="furniture-list" class="furniture-grid"
+            aria-label="Furniture items"></div>
+
+          <div id="empty-state" class="empty-state" hidden>
+            <span class="empty-icon" aria-hidden="true">⌕</span>
+            <h3>No data found</h3>
+            <p>Try another search or add a new furniture piece.</p>
+            <button class="button button-light" id="reset-search" type="button">
+              Clear filters
+            </button>
+          </div>
+        </section>
+
+        <footer class="footer">
+          <span>Furniture Studio</span>
+          <span>Thoughtfully crafted · Collection workspace</span>
+        </footer>
+      </main>
+    </div>
+  </div>
+
+  <div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
+</body>
+</html>
